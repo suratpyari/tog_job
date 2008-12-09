@@ -1,4 +1,4 @@
-<%= render :partial => 'head' %>
+<%= head %>
 <%= "There is no job Available" if !@jobs || @jobs.empty? %>
   <% for job in @jobs %>
     <div class="job_title">

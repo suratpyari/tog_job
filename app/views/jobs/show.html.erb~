@@ -1,4 +1,4 @@
-<%= render :partial => 'head' %>
+<%= head %>
   <div class="job_title">
   <h2><%= @job.title %></h2>
 </div>

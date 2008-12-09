@@ -6,7 +6,7 @@
   <%= @job.description %>
 </div>
 <div class="job_posted_by">
-  <%= link_to @job.user_profile.full_name, profile_path(@job.user_profile) %>
+  posted by <%= link_to @job.user_profile.full_name, profile_path(@job.user_profile) %>
 </div>
 <% content_for :sidebar do %>
   <%= render :partial => 'sidebar' %>

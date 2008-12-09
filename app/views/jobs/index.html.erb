@@ -1,0 +1,17 @@
+<%= head %>
+<%= "There is no job Available" if !@jobs || @jobs.empty? %>
+  <% for job in @jobs %>
+    <div class="job_title">
+      <%= link_to job.title, job_path(job) %>
+    </div>
+    <div class="job_description">
+      <%= truncate(job.description, 200) %>
+    </div>
+    <div class="job_posted_by">
+      <%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
+    </div>
+    <hr />
+  <% end %>
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar' %>
+<% end %>

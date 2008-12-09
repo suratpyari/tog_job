@@ -1,0 +1,6 @@
+<ul>
+  <li><%= link_to "Available Jobs", jobs_path %></li>
+  <li><%= link_to "Required Jobs", jobs_path(:type=>"required") %></li>
+  <li><%= link_to "Post Jobs", new_jobs_path %></li>
+  <li><%= link_to "Jobs Wishlist", new_jobs_path(:type=>"required") %></li>
+</ul>

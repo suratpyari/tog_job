@@ -1,0 +1,2 @@
+class AvailableJob < Job
+end

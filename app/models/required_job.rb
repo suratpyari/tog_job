@@ -1,0 +1,2 @@
+class RequiredJob < Job
+end

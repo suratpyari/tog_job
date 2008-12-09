@@ -1,0 +1,12 @@
+<%= head %>
+<% form_for @job, :url => jobs_path do |f| %>
+  <%= error_messages_for :job %>
+  <%= f.label :title %><br />
+  <%= f.text_field :title %><br />
+  <%= f.label :description %><br />
+  <%= f.text_area :description %><br />
+    <%= f.submit "submit" %><br />
+<% end %>
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar' %>
+<% end %>

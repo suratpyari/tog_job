@@ -2,10 +2,12 @@ module JobsHelper
 
 
   def head
+  debugger
     head_string = "<h2> #{params[:type] == 'required' ? 'Required Jobs' : 'Available Jobs'}</h2>"
     if current_user
       head_string += params[:type] == 'required' ? 'If you are a developer and wants a job then '+link_to('post requirements', new_job_path(:type => 'required'), :class => 'button add')+' here' : 'If you are a company and wants to hire developers then '+link_to('Post Jobs', new_job_path, :class => 'button add')+' here'
     end
+    return head_string
   end
   
   def if_empty(jobs)

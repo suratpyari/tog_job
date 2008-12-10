@@ -19,6 +19,15 @@ class JobsController < ApplicationController
   def show
   end
   
+  def destroy
+    if @job.user == current_user
+      flash[:ok] = "Job has been deleted successfully" if @job.destroy
+    else
+      flash[:error] = "Sorry we cannot process your request"
+    end
+    redirect_to :back
+  end
+  
  private ###########################
  
   def find_job

@@ -1,1 +1,0 @@
-<h1><%= params[:type] == "required" ? "Required Jobs" : "Available Jobs" %></h1>

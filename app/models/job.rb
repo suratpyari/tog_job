@@ -4,4 +4,5 @@ class Job < ActiveRecord::Base
   end
   belongs_to :user
   validates_presence_of :title, :description
+  
 end

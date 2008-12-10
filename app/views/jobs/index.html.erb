@@ -1,5 +1,7 @@
 <%= head %>
-<%= "There is no job Available" if !@jobs || @jobs.empty? %>
+<br />
+<br />
+<%= if_empty(@jobs) %>
   <% for job in @jobs %>
     <div class="job_title">
       <%= link_to job.title, job_path(job) %>

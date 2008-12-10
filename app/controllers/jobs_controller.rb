@@ -12,10 +12,8 @@ class JobsController < ApplicationController
   end
   
   def create
-    @job = params[:available_job] ? 
-            AvailableJob.new(params[:available_job].merge({:user_id => current_user.id}))
-            : RequiredJob.new(params[:required_job].merge({:user_id => current_user.id}))
-    @job.save ? redirect_to job_path(@job) : render :action => 'new'
+    @job = params[:available_job] ? AvailableJob.new(params[:available_job].merge({:user_id => current_user.id})) : RequiredJob.new(params[:required_job].merge({:user_id => current_user.id}))
+    @job.save ? (redirect_to job_path(@job)) : (render :action => 'new')
   end
   
   def show
@@ -33,7 +31,7 @@ class JobsController < ApplicationController
   
   def current_user?
     unless current_user
-      flash[:error] = "Sorry wo cannot process your request"
+      flash[:error] = "Sorry we cannot process your request"
       redirect_to jobs_path
     end
   end

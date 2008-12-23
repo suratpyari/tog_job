@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   before_filter :current_user?, :only => [:new, :create, :destroy]
   
   def index
-    @jobs = params[:type] == "required" ? RequiredJob.find(:all) : AvailableJob.find(:all)
+    @jobs = params[:type] == "required" ? RequiredJob.find(:all).paginate(:page => params[:page]) : AvailableJob.find(:all).paginate(:page => params[:page])
   end
   
   def new

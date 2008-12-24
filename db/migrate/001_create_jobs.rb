@@ -1,9 +1,8 @@
 class CreateJobs < ActiveRecord::Migration
   def self.up
     create_table :jobs do |t|
-      t.string      :title
-      t.text        :description
-      t.string      :type
+      t.string      :designation, :experience, :company_name, :education
+      t.text        :skills
       t.references  :user
       t.timestamps
     end

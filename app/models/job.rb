@@ -1,4 +1,4 @@
-class AvailableJob < ActiveRecord::Base
+class Job < ActiveRecord::Base
   def user_profile
     return user.profile
   end

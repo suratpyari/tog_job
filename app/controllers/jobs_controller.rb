@@ -18,7 +18,7 @@ class JobsController < ApplicationController
   end
   
   def edit
-    render :templalate => 'new'
+    render :template => 'jobs/new'
   end
   
   def update

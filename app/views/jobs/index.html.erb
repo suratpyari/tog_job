@@ -13,6 +13,9 @@
       posted by <%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
     </div>
     <% if job.user == current_user %>
+      <div class="job_edit">
+        <%= link_to "Edit", edit_job_path(job) %>
+      </div>
       <div class="job_delete">
         <%= link_to "Delete", job_path(job), :method => :delete, :confirm => 'Are you sure' %>
       </div>

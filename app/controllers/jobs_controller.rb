@@ -1,7 +1,8 @@
 class JobsController < ApplicationController
 
-  before_filter :find_job, :only => [:show, :destroy]
-  before_filter :current_user?, :only => [:new, :create, :destroy]
+  before_filter :find_job, :only => [:show, :destroy, :edit, :update]
+  before_filter :current_user?, :only => [:new, :create, :destroy, :edit, :update]
+  before_filter :job_user?, :only => [:destroy, :edit, :update]
   
   def index
     @jobs = params[:type] == "required" ? RequiredJob.find(:all).paginate(:page => params[:page]) : AvailableJob.find(:all).paginate(:page => params[:page])
@@ -16,15 +17,19 @@ class JobsController < ApplicationController
     @job.save ? (redirect_to job_path(@job)) : (render :action => 'new')
   end
   
+  def edit
+    render :templalate => 'new'
+  end
+  
+  def update
+    @job.update_attributes(params[:job]) ? (redirect_to job_path(@job)) : (render :action => 'edit')
+  end
+  
   def show
   end
   
   def destroy
-    if @job.user == current_user
-      flash[:ok] = "Job has been deleted successfully" if @job.destroy
-    else
-      flash[:error] = "Sorry we cannot process your request"
-    end
+    flash[:ok] = "Job has been deleted successfully" if @job.destroy
     redirect_to :back
   end
   
@@ -40,6 +45,13 @@ class JobsController < ApplicationController
   
   def current_user?
     unless current_user
+      flash[:error] = "Sorry we cannot process your request"
+      redirect_to jobs_path
+    end
+  end
+  
+  def job_user?
+    unless @job.user == current_user
       flash[:error] = "Sorry we cannot process your request"
       redirect_to jobs_path
     end

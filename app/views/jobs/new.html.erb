@@ -4,10 +4,19 @@
 <% form_for @job, :url => jobs_path do |f| %>
   <div class="fields">
   <%= error_messages_for :job %>
-  <p><%= f.label :title %>
-  <%= f.text_field :title %></p>
-  <p><%= f.label :description %>
-  <%= f.text_area :description %></p>
+  <% if @job.class.to_s == "AvailableJob" %>
+    <p><%= f.label :designation %>
+    <%= f.text_field :designation %></p>
+    <p><%= f.label :company_name %>
+    <%= f.text_field :company_name %></p>
+  <% else %>
+    <p><%= f.label :education %>
+    <%= f.text_field :education %></p>
+  <% end %>
+    <p><%= f.label :skills %>
+    <%= f.text_area :skills %></p>
+    <p><%= f.label :experience %>
+    <%= f.text_field :experience %></p>
   <div class="actions"><%= f.submit "submit", :class => 'button mainaction' %></div><br />
   </div>
 <% end %>

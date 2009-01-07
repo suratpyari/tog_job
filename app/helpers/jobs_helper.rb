@@ -13,7 +13,7 @@ module JobsHelper
   
   def if_empty(jobs)
     if jobs.nil? || jobs.empty?
-      return "Be the first one to post a #{params[:type].match(/required/) ? link_to('Jobs Required', new_job_path(:type => 'required'), :class => 'button add') : link_to('Available Jobs', new_job_path, :class => 'button add')}"
+      return "Be the first one to post a #{params[:type] and params[:type].match(/required/) ? link_to('Jobs Required', new_job_path(:type => 'required'), :class => 'button add') : link_to('Available Jobs', new_job_path, :class => 'button add')}"
     end
   end
   

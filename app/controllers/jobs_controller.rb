@@ -5,16 +5,16 @@ class JobsController < ApplicationController
   before_filter :job_user?, :only => [:destroy, :edit, :update]
   
   def index
-   @jobs = params[:type] == "required" ? RequiredJob.paginate(:page => params[:page] ? params[:page] : 1) : AvailableJob.paginate(:page => params[:page] ? params[:page] : 1)
+   @jobs = params[:type].match(/required/) ? RequiredJob.paginate(:page => params[:page] ? params[:page] : 1) : AvailableJob.paginate(:page => params[:page] ? params[:page] : 1)
   end
   
   def new
-    @job = params[:type] == "required" ? RequiredJob.new() : AvailableJob.new()
+    @job = params[:type].match(/required/) ? RequiredJob.new() : AvailableJob.new()
   end
   
   def create
     @job = params[:available_job] ? AvailableJob.new(params[:available_job].merge({:user_id => current_user.id})) : RequiredJob.new(params[:required_job].merge({:user_id => current_user.id}))
-    @job.save ? (redirect_to job_path(@job)) : (render :action => 'new')
+    @job.save ? (redirect_to job_path(@job, :type => @job.class.to_s.downcase)) : (render :action => 'new')
   end
   
   def edit
@@ -22,7 +22,7 @@ class JobsController < ApplicationController
   end
   
   def update
-    @job.update_attributes(params[:job]) ? (redirect_to job_path(@job)) : (render :action => 'edit')
+    @job.update_attributes(params[:job]) ? (redirect_to job_path(@job, :type => @job.class.to_s.downcase)) : (render :action => 'edit')
   end
   
   def show

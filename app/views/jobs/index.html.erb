@@ -2,37 +2,38 @@
 <br />
 <br />
 <%= if_empty(@jobs) %>
+<% unless @jobs.nil? || @jobs.empty? %>
   <% for job in @jobs %>
     <% if job.class.to_s == "AvailableJob" %>
-  <div class="job_designation">
-    <%= h job.designation %>
-  </div>
-  <div class="job_company">
-    <%= h job.company_name %>
-  </div>
-  <div class="job_skills">
-    <%= h job.skills %>
-  </div>
-  <div class="job_experience">
-    <%= h job.experience %>
-  </div>
-  <div class="job_posted_by">
-    posted by <%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
-  </div>
-<% else %>
-  <div class="job_candidate">
-    <%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
-  </div>
-  <div class="education">
-    <%= h job.education %>
-  </div>
-  <div class="job_skills">
-    <%= h job.skills %>
-  </div>
-  <div class="job_experience">
-    <%= h job.experience %>
-  </div>
-<% end %>
+			<div class="job_designation">
+				<%= h job.designation %>
+			</div>
+			<div class="job_company">
+				<%= h job.company_name %>
+			</div>
+			<div class="job_skills">
+				<%= h job.skills %>
+			</div>
+			<div class="job_experience">
+				<%= h job.experience %>
+			</div>
+			<div class="job_posted_by">
+				posted by <%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
+			</div>
+		<% else %>
+			<div class="job_candidate">
+				<%= link_to job.user_profile.full_name, profile_path(job.user_profile) %>
+			</div>
+			<div class="education">
+				<%= h job.education %>
+			</div>
+			<div class="job_skills">
+				<%= h job.skills %>
+			</div>
+			<div class="job_experience">
+				<%= h job.experience %>
+			</div>
+		<% end %>
     <% if job.user == current_user %>
       <div class="job_edit">
         <%= link_to "Edit", edit_job_path(job) %>
@@ -44,6 +45,7 @@
     <hr />
   <% end %>
   <%= will_paginate @jobs %>
+<% end %>
 <% content_for :sidebar do %>
   <%= render :partial => 'sidebar' %>
 <% end %>

@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   before_filter :job_user?, :only => [:destroy, :edit, :update]
   
   def index
-   @jobs = params[:type].match(/required/) ? RequiredJob.paginate(:page => params[:page] ? params[:page] : 1) : AvailableJob.paginate(:page => params[:page] ? params[:page] : 1)
+   @jobs = params[:type].match(/required/) ? RequiredJob.paginate(:page => params[:page] ? params[:page] : 1, :order => 'updated_at DESC') : AvailableJob.paginate(:page => params[:page] ? params[:page] : 1, :order => 'updated_at DESC')
   end
   
   def new
